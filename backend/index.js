@@ -1,8 +1,8 @@
+var albumsHandler = require('./albums');
+
 var express = require('express');
 var app = express();
 
-app.get('/', function (req, res) {
-    res.send('Server up and running');
-  });
+app.use('/albums', albumsHandler);
 
 app.listen(process.env.NODE_PORT);
