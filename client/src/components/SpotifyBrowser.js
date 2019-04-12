@@ -1,15 +1,30 @@
 import React from 'react';
 import axios from 'axios';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import CardColumns from 'react-bootstrap/CardColumns';
+
+function ListItem(props) {
+    let album = props.album;
+    return <Card style={{ width: '18rem' }}>
+    <Card.Img variant="top" src="holder.js/100px180" />
+    <Card.Body>
+      <Card.Title>{album.name}</Card.Title>
+      <Card.Text>
+        Authors: {album.artists.join(" & ")}
+      </Card.Text>
+      <Card.Link href={album.url}>Listen preview</Card.Link>
+    </Card.Body>
+  </Card>;
+}
 
 function AlbumList(props) {
     const albums = props.albums;
     const listItems = albums.map((album) =>
-      <li key={album.id.toString()}>
-        {album.name}
-      </li>
+        <ListItem album={album}/>
     );
     return (
-      <ul>{listItems}</ul>
+        <CardColumns>{listItems}</CardColumns>
     );
   }
 
@@ -69,15 +84,17 @@ class SpotifyBrowser extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Search for an album
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Group controlId="formSearchSpotifyAlbum">
+                    <Form.Control 
+                        type="text" 
+                        placeholder="Enter album name"  
+                        value={this.state.value} onChange={this.handleChange}
+                    />
+                </Form.Group>
                 {this.state.searchedTerm ? <p>Results for query '{this.state.searchedTerm}':</p> : ''}
                 <AlbumList albums={this.state.searchResult}/>
-            </form>
+            </Form>
         );
     }
 }
