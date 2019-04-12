@@ -7,6 +7,7 @@ const Album = new Schema(
     id: String,
     name: String,
     url: String,
+    image: String,
     releaseDate: String,
     numberOfTracks: String,
     artists: []

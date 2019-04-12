@@ -7,13 +7,13 @@ import CardColumns from 'react-bootstrap/CardColumns';
 function ListItem(props) {
     let album = props.album;
     return <Card style={{ width: '18rem' }}>
-    <Card.Img variant="top" src="holder.js/100px180" />
+    <Card.Img variant="top" src={album.image} />
     <Card.Body>
       <Card.Title>{album.name}</Card.Title>
       <Card.Text>
         Authors: {album.artists.join(" & ")}
       </Card.Text>
-      <Card.Link href={album.url}>Listen preview</Card.Link>
+      <Card.Link href={album.url}>Open in spotify</Card.Link>
     </Card.Body>
   </Card>;
 }
