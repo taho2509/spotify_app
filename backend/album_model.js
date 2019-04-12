@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-// database's data structure 
+// database's data structure
 const Album = new Schema(
   {
     id: String,
@@ -12,7 +12,7 @@ const Album = new Schema(
     numberOfTracks: String,
     artists: []
   }
-);
+)
 
 // export the new Schema so we could modify it using Node.js
-module.exports = mongoose.model('Album', Album);
+module.exports = mongoose.model('Album', Album)

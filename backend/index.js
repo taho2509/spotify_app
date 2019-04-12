@@ -1,14 +1,14 @@
-var albumsHandler = require('./albums');
+var albumsHandler = require('./albums')
 
-var express = require('express');
-var app = express();
-const bodyParser = require('body-parser');
-const cors = require('cors');
+var express = require('express')
+var app = express()
+const bodyParser = require('body-parser')
+const cors = require('cors')
 
-app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
-app.use('/albums', albumsHandler);
+app.use('/albums', albumsHandler)
 
-app.listen(process.env.NODE_PORT);
+app.listen(process.env.NODE_PORT)
