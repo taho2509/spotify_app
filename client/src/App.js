@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import SpotifyBrowser from "./components/SpotifyBrowser";
 
 class App extends Component {
   render() {
-    return <div>Empty Spotify Front</div>;
+    return <SpotifyBrowser/>;
   }
 }
 
