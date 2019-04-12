@@ -42,7 +42,7 @@ router.get('/', function(req, res) {
   .then((values) => res.json({ success: true , albums: values}))
   .catch(err => {
     console.log("An error while searching albums occurred: ", err);
-    res.json({ success: false});
+    res.json({ success: false, error: err});
   })
 });
 
