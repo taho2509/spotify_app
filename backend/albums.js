@@ -20,8 +20,9 @@ db.once("open", () => console.log("connected to the database"));
 // checks if connection with the database is successful
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-router.get('/:id([0-9a-z+]+)', function(req, res) {
-  spotifyApi.searchAlbums(req.params.id)
+router.get('/', function(req, res) {
+  console.log("search",req.query.search);
+  spotifyApi.searchAlbums(req.query.search)
   .then(data => {
 
     let albums = data.body.albums.items.map((item) => {
