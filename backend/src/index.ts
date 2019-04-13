@@ -1,9 +1,9 @@
-var albumsHandler = require('./albums')
+import albumsHandler from './albums'
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
 
-var express = require('express')
 var app = express()
-const bodyParser = require('body-parser')
-const cors = require('cors')
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
