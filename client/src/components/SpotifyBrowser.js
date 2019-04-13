@@ -41,75 +41,75 @@ class SpotifyBrowser extends React.Component {
     errorMessage: "",
   }
 
-      handleChange = (event) => {
-        this.setState({value: event.target.value});
-      }
+  handleChange = (event) => {
+    this.setState({value: event.target.value});
+  }
 
-      handleSubmit = (event) => {
-        event.preventDefault();
-        const data = {
-            search: this.state.value
-        }
-        axios.get("http://localhost:3001/albums",{ params: data})
-        .then(response => {
-            response.data.success ?
-            this.setState({
-                value: '',
-                searchResult: response.data.albums,
-                searchedTerm: this.state.value,
-                error: false,
-                errorMessage: "",
-            }) :
-            this.setState({
-                value: this.state.value,
-                searchResult: [],
-                searchedTerm: '',
-                error: true,
-                errorMessage: response.data.error,
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
-            this.setState({
-                value: this.state.value,
-                searchResult: [],
-                searchedTerm: '',
-                error: true,
-                errorMessage: error,
-            });
-        });
-      }
-
-    render() {
-        return (
-          <Fragment>
-          <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">Spotify Albums Browser</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Form inline onSubmit={this.handleSubmit}>
-                <FormControl type="text" placeholder="Enter album name" value={this.state.value} onChange={this.handleChange} className="mr-sm-2" />
-                <Button type="submit" variant="outline-success">Search</Button>
-              </Form>
-            </Navbar.Collapse>
-          </Navbar>
-          {
-            this.state.searchedTerm ? 
-            <Alert variant="success">
-              {this.state.searchResult.length} Results for query '{this.state.searchedTerm}'
-            </Alert> 
-            : ''
-          }
-          {
-            this.state.error ? 
-            <Alert variant="error">
-              Error '{this.state.errorMessage}':
-            </Alert> 
-            : ''
-          }
-          <AlbumList albums={this.state.searchResult}/>
-        </Fragment>);
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const data = {
+        search: this.state.value
     }
+    axios.get("http://localhost:3001/albums",{ params: data})
+    .then(response => {
+        response.data.success ?
+        this.setState({
+            value: '',
+            searchResult: response.data.albums,
+            searchedTerm: this.state.value,
+            error: false,
+            errorMessage: "",
+        }) :
+        this.setState({
+            value: this.state.value,
+            searchResult: [],
+            searchedTerm: '',
+            error: true,
+            errorMessage: response.data.error,
+        });
+    })
+    .catch(function (error) {
+        console.log(error);
+        this.setState({
+            value: this.state.value,
+            searchResult: [],
+            searchedTerm: '',
+            error: true,
+            errorMessage: error,
+        });
+    });
+  }
+
+  render() {
+      return (
+        <Fragment>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">Spotify Albums Browser</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Form inline onSubmit={this.handleSubmit}>
+              <FormControl type="text" placeholder="Enter album name" value={this.state.value} onChange={this.handleChange} className="mr-sm-2" />
+              <Button type="submit" variant="outline-success">Search</Button>
+            </Form>
+          </Navbar.Collapse>
+        </Navbar>
+        {
+          this.state.searchedTerm ? 
+          <Alert variant="success">
+            {this.state.searchResult.length} Results for query '{this.state.searchedTerm}'
+          </Alert> 
+          : ''
+        }
+        {
+          this.state.error ? 
+          <Alert variant="error">
+            Error '{this.state.errorMessage}':
+          </Alert> 
+          : ''
+        }
+        <AlbumList albums={this.state.searchResult}/>
+      </Fragment>);
+  }
 }
 
 export default SpotifyBrowser;
