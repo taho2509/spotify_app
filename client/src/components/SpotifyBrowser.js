@@ -10,7 +10,7 @@ import Alert from 'react-bootstrap/Alert';
 
 function Album(props) {
     let album = props.album;
-    return <Card style={{ width: '18rem' }}>
+    return <Card style={{ width: '18rem' }} key={album.id}>
     <Card.Img variant="top" src={album.image} />
     <Card.Body>
       <Card.Title>{album.name}</Card.Title>
@@ -28,7 +28,7 @@ function AlbumList(props) {
         <Album album={album}/>
     );
     return (
-        <CardColumns Style="margin: 0px 200px;">{items}</CardColumns>
+        <CardColumns style={{margin: "0px 200px"}}>{items}</CardColumns>
     );
   }
 
@@ -65,7 +65,7 @@ class SpotifyBrowser extends React.Component {
             searchResult: [],
             searchedTerm: '',
             error: true,
-            errorMessage: response.data.error,
+            errorMessage: response.data.error.message,
         });
     })
     .catch(function (error) {
@@ -102,7 +102,7 @@ class SpotifyBrowser extends React.Component {
         }
         {
           this.state.error ? 
-          <Alert variant="error">
+          <Alert variant="danger">
             Error '{this.state.errorMessage}':
           </Alert> 
           : ''
