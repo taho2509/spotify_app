@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node -r dotenv/config index.js"
+    "start": "node -r dotenv/config build/index.js",
+    "build": "npx tsc -p .",
+    "prestart": "npm run build",
+    "start:dev": "ts-node -r dotenv/config src/index.ts"
   },
   "keywords": [
     "spotify",
@@ -19,14 +22,23 @@
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "mongoose": "^5.5.1",
-    "spotify-web-api-node": "^4.0.0"
+    "spotify-web-api-node": "^4.0.0",
+    "spotify-web-api-node-typings": "0.0.5"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.16.1",
+    "@types/mongoose": "^5.3.26",
+    "@types/node": "^11.13.4",
+    "@types/spotify-api": "0.0.0",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.1.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.4.3"
   }
 }
