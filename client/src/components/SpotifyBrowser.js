@@ -50,32 +50,25 @@ class SpotifyBrowser extends React.Component {
     const data = {
         search: this.state.value
     }
+    let that = this; 
     axios.get("http://localhost:3001/albums",{ params: data})
     .then(response => {
-        response.data.success ?
-        this.setState({
+        that.setState({
             value: '',
             searchResult: response.data.albums,
             searchedTerm: this.state.value,
             error: false,
             errorMessage: "",
-        }) :
-        this.setState({
-            value: this.state.value,
-            searchResult: [],
-            searchedTerm: '',
-            error: true,
-            errorMessage: response.data.error.message,
-        });
+        })
     })
-    .catch(function (error) {
-        console.log(error);
-        this.setState({
-            value: this.state.value,
+    .catch((error) => {
+        console.log("error",error);
+        that.setState({
+            value: that.state.value,
             searchResult: [],
             searchedTerm: '',
             error: true,
-            errorMessage: error,
+            errorMessage: "Oops, something went wrong!",// "error.response.data.message",
         });
     });
   }
@@ -103,7 +96,7 @@ class SpotifyBrowser extends React.Component {
         {
           this.state.error ? 
           <Alert variant="danger">
-            Error '{this.state.errorMessage}':
+             {this.state.errorMessage}
           </Alert> 
           : ''
         }

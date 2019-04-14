@@ -5,8 +5,9 @@ import { Album, IAlbumModel } from './album_model'
 
 const router = express.Router()
 
+let connectionStringProvided = process.env.MONGO_CONNECTION_STRING !== undefined
 mongoose.connect(
-  process.env.MONGO_CONNECTION_STRING || "", // TODO: handle exception 
+  process.env.MONGO_CONNECTION_STRING || "",
   { useNewUrlParser: true }
 )
 
@@ -18,6 +19,9 @@ db.once('open', () => console.log('connected to the database'))
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 router.get('/', function (req, res) {
+  if(!connectionStringProvided) {
+    res.status(500).json({ message: "Internal error"})
+  }
   spotifyApi.clientCredentialsGrant()
     .then(data => {
       spotifyApi.setAccessToken(data.body['access_token'])
@@ -40,10 +44,10 @@ router.get('/', function (req, res) {
 
       return Promise.all(albums)
     })
-    .then((values: IAlbumModel[]) => res.json({ success: true, albums: values }))
+    .then((values: IAlbumModel[]) => res.status(200).json({ albums: values }))
     .catch((err: Error) => {
       console.log('An error while searching albums occurred: ', err)
-      res.json({ success: false, error: err })
+      res.status(500).json({ message: "An error while searching albums occurred"})
     })
 })
 
