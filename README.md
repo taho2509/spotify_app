@@ -17,6 +17,17 @@ To install frontend dependencies
 cd client && npm install
 ```
 
+## Configurations
+
+Create a .env file in backend directory and include the following keys
+
+```env
+NODE_PORT=<port> // avoid conflict with react app port
+CLIENT_ID=<your_client_id>
+CLIENT_SECRET=<your_client_secret>
+MONGO_CONNECTION_STRING=mongodb://<hostname>/<database_name>
+```
+
 ## Run
 
 ```bash
