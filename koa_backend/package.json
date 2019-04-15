@@ -1,0 +1,40 @@
+{
+  "name": "koa_backend",
+  "version": "1.0.0",
+  "description": "An API working as a wrapper for Spotify Web API using koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r dotenv/config build/app.js",
+    "build": "npx tsc -p .",
+    "prestart": "npm run build",
+    "start:dev": "ts-node -r dotenv/config src/app.ts"
+  },
+  "keywords": [
+    "spotify",
+    "koa"
+  ],
+  "author": "taho2509@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "koa": "^2.7.0",
+    "koa-cors": "0.0.16",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.5.1",
+    "spotify-web-api-node": "^4.0.0",
+    "spotify-web-api-node-typings": "0.0.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.4",
+    "@types/koa": "^2.0.48",
+    "@types/koa-cors": "0.0.0",
+    "@types/koa-router": "^7.0.40",
+    "@types/mongoose": "^5.3.26",
+    "@types/node": "^11.13.4",
+    "@types/spotify-api": "0.0.0",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.3"
+  }
+}
