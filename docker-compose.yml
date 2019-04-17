@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+    client:
+        build: ./client
+        restart: always
+        ports:
+            - "80:80"
+        links:
+            - api
+            
+    api:
+        build: ./backend
+        restart: always
+        ports:
+            - "9000:3000"
+        links:
+            - mongo
+    
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
