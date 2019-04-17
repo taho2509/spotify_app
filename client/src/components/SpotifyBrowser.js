@@ -50,8 +50,8 @@ class SpotifyBrowser extends React.Component {
     const data = {
         search: this.state.value
     }
-    let that = this; 
-    axios.get("http://localhost:3001/albums",{ params: data})
+    let that = this
+    axios.get(process.env.REACT_APP_SPOTIFY_API_LOCATION,{ params: data})
     .then(response => {
         that.setState({
             value: '',
