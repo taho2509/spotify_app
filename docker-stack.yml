@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+    client:
+        build: ./client
+        image: taho2509/react-spotify-client
+        restart: always
+        ports:
+            - "80:80"
+        links:
+            - api
+        deploy:
+            placement:
+                constraints: [node.role != manager]
+            replicas: 2
+
+    api:
+        build: ./backend
+        image: taho2509/express-spotify-api
+        restart: always
+        ports:
+            - "9000:3000"
+        links:
+            - mongo
+        deploy:
+            replicas: 3
+
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017
